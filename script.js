@@ -1,33 +1,36 @@
 
 
-let randomChoice
+let randomChoice //setting a variable to get a random choice
 
-function getComputerChoice(){
+function getComputerChoice(){  //function to get the random choice from the computer
     let randomChoiceNum = Math.floor(Math.random()*3)+1;
    
     if(randomChoiceNum==1){
        return randomChoice='Rock';
     }else if(randomChoiceNum==2){
         return randomChoice='Paper';
-    }else{
+    }else {
       return  randomChoice='Scissor';
   }  
 }
 
-function userInput(){
+function userInput(){ //function for a user input
     return prompt('Enter your Choice! ').toLowerCase();
 }
 
-function game(){
+function game(){ //function to initiate the game
         let counter = 1;
         while(counter<=5){
+            const computerSelection=getComputerChoice();
             singleRound(userInput,computerSelection);
+            
             counter++;
 
        }           
 }
-let score=0;
-function singleRound(playerSelection,computerSelection){
+let score=0; //variable for setting the score
+
+function singleRound(playerSelection,computerSelection){ //function for a single round of the game
     playerSelection = userInput();
    
     if(playerSelection == 'rock' && computerSelection == 'Paper'){
@@ -56,21 +59,19 @@ function singleRound(playerSelection,computerSelection){
     }else if(playerSelection=='scissor' && computerSelection =='Scissor'){
         console.log('It is a Draw! Try Again');
     }
-   
-
-}
-
-
-const computerSelection=getComputerChoice();
-game();
-scorePoints();
-
-function scorePoints(){
+    }
+ 
+function scorePoints(){ //function to keep the score
     console.log(`Score: ${score}`)
     if(score<3){
         console.log('You Lose! Computer Wins!!!');
     }else{
         console.log('You Win!, Congratulations!!!');
+        }
     }
-}
+    
+game();
+scorePoints();
+
+
 
