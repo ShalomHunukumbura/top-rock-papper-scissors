@@ -1,77 +1,65 @@
+const btnChoices = document.querySelectorAll('.btn_choice');
+        const result = document.querySelector('.result');
+        
+        
+        let randChoice;
+        let round = 0;
 
-
-let randomChoice //setting a variable to get a random choice
-
-function getComputerChoice(){  //function to get the random choice from the computer
-    let randomChoiceNum = Math.floor(Math.random()*3)+1;
-   
-    if(randomChoiceNum==1){
-       return randomChoice='Rock';
-    }else if(randomChoiceNum==2){
-        return randomChoice='Paper';
-    }else {
-      return  randomChoice='Scissor';
-  }  
-}
-
-function userInput(){ //function for a user input
-    return prompt('Enter your Choice! ').toLowerCase();
-}
-
-function game(){ //function to initiate the game
-        let counter = 1;
-        while(counter<=5){
-            const computerSelection=getComputerChoice();
-            singleRound(userInput,computerSelection);
-            
-            counter++;
-
-       }           
-}
-let score=0; //variable for setting the score
-
-function singleRound(playerSelection,computerSelection){ //function for a single round of the game
-    playerSelection = userInput();
-   
-    if(playerSelection == 'rock' && computerSelection == 'Paper'){
-        console.log('You lose! Paper beats Rock');
-        score--;
-
-    }else if(playerSelection== 'rock' && computerSelection == 'Scissor' ){
-        console.log('you win! Rock beats scissor');
-        score++;
-    }else if(playerSelection=='rock' && computerSelection =='Rock'){
-        console.log('It is a Draw! Try Again');
-    }if(playerSelection == 'paper' && computerSelection == 'Rock'){
-        console.log('You win! Paper beats Rock');
-        score++;
-    }else if(playerSelection== 'paper' && computerSelection == 'Scissor' ){
-        console.log('you loose! scissor beats paper');
-        score--;
-    }else if(playerSelection=='paper' && computerSelection =='Paper'){
-        console.log('It is a Draw! Try Again');
-    }if(playerSelection == 'scissor' && computerSelection == 'Paper'){
-        console.log('You win! Scissor beats paper');
-        score++;
-    }else if(playerSelection== 'scissor' && computerSelection == 'Rock' ){
-        console.log('you loose! Rock beats scissor');
-        score--;
-    }else if(playerSelection=='scissor' && computerSelection =='Scissor'){
-        console.log('It is a Draw! Try Again');
-    }
-    }
- 
-function scorePoints(){ //function to keep the score
-    console.log(`Score: ${score}`)
-    if(score<3){
-        console.log('You Lose! Computer Wins!!!');
-    }else{
-        console.log('You Win!, Congratulations!!!');
+        function computerachoice(){
+            return Math.floor(Math.random() * 3)+1;            
         }
-    }
-    
-game();
-scorePoints();
+        
+        
+    btnChoices.forEach(btnChoice => {
+            btnChoice.addEventListener('click', () => {
+                if (round < 5) {
+                    const btnName = btnChoice.getAttribute('name');
+                    const compChoice = computerachoice();
+
+                    if (btnName === 'rock') {
+                        rockChoice(compChoice);
+                    } else if (btnName === 'paper') {
+                        paperChoice(compChoice);
+                    } else if (btnName === 'scissor') {
+                        scissorChoice(compChoice);
+                    }
+
+                    round++;
+                } else {
+                    result.textContent = "Game over!";
+                }
+            });
+        });
 
 
+        function rockChoice(compChoice){
+            if (compChoice == 1){
+                result.textContent = "It is a draw!!";
+            }else if(compChoice == 2){
+                result.textContent = "You loose, paper beats rock!!"
+            }else if(compChoice == 3){
+                result.textContent = "You win, Rock beats Scissors!!";
+            }
+        }
 
+        function paperChoice(compChoice){
+            if (compChoice == 1){
+                result.textContent = "You win Paper beats Rock!!";
+            }else if(compChoice == 2){
+                result.textContent = "It is a draw!!"
+            }else if(compChoice == 3){
+                result.textContent = "You loose, Scissor beats Paper!!";
+            }
+        }
+
+        function scissorChoice(compChoice){
+            if (compChoice == 1){
+                result.textContent = "You loose, Rock beats Scissor!!";
+            }else if(compChoice == 2){
+                result.textContent = "You win, Scissor beats Paper!!"
+            }else if(compChoice == 3){
+                result.textContent = "It is a draw!!";
+            }
+        }
+      
+        
